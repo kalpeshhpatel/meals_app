@@ -3,6 +3,9 @@ import 'package:meals_app/screens/categoryItem.dart';
 import '../models/dummy_data.dart';
 
 class CategoryList extends StatelessWidget {
+
+  static const routeName = '/';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

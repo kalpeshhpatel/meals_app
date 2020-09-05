@@ -30,8 +30,6 @@ class CategoryItem extends StatelessWidget {
   }
 
   void _selectCategory(BuildContext context) {
-    Navigator.of(context).push(MaterialPageRoute(builder: (_) {
-      return CategoryMeals(_categoryItem);
-    }));
+    Navigator.of(context).pushNamed(CategoryMeals.routeName, arguments: _categoryItem);
   }
 }
