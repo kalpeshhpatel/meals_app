@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:meals_app/screens/categoryMeals.dart';
+import 'package:meals_app/screens/mealDetail.dart';
 import './screens/categoryList.dart';
 
 void main() {
@@ -23,8 +24,8 @@ class MyApp extends StatelessWidget {
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
         primarySwatch: Colors.red,
-        accentColor: Colors.redAccent,
-        canvasColor: Color.fromRGBO(255, 220, 229, 0.9),
+        accentColor: Colors.red[100],
+        canvasColor: Color.fromRGBO(255, 254, 254, 0.9),
         fontFamily: 'Raleway',
         textTheme: ThemeData.light().textTheme.copyWith(
               body1: TextStyle(color: Color.fromRGBO(20, 51, 51, 1)),
@@ -44,6 +45,13 @@ class MyApp extends StatelessWidget {
       routes: {
         CategoryList.routeName: (context) => CategoryList(),
         CategoryMeals.routeName: (context) => CategoryMeals(),
+        MealDetail.routeName: (context) => MealDetail()
+      },
+      // when unknown route is hit
+      onUnknownRoute: (settings) {
+        return MaterialPageRoute(builder: (context) {
+          return CategoryList();
+        });
       },
     );
   }
