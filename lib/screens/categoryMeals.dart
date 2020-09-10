@@ -1,16 +1,20 @@
 import 'package:flutter/material.dart';
+import '../models/meal.dart';
 import '../models/category.dart';
-import '../models/dummy_data.dart';
 import '../widgets/mealView.dart';
 
 class CategoryMeals extends StatelessWidget {
   static const routeName = '/category-meal';
 
+  final List<Meal> _availableMeals;
+
+  CategoryMeals(this._availableMeals);
+
   @override
   Widget build(BuildContext context) {
     final _category = ModalRoute.of(context).settings.arguments as Category;
 
-    final _categoryMeals = DUMMY_MEALS
+    final _categoryMeals = _availableMeals
         .where((element) => element.categories.contains(_category.id))
         .toList();
 
