@@ -47,7 +47,26 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
+  void _toggleFavorite(String mealId) {
+    final existingIndex = _favoritedMeals.indexWhere((element) => element.id == mealId);
+    if (existingIndex >= 0) {
+      setState(() {
+        _favoritedMeals.removeAt(existingIndex);
+      });
+    } else {
+      setState(() {
+        _favoritedMeals.add(DUMMY_MEALS.firstWhere((element) => element.id == mealId));
+      });
+    }
+  }
+
+  bool _isFavorite(String mealId) {
+    return _favoritedMeals.any((element) => element.id == mealId);
+  }
+
   List<Meal> _availableMeals = DUMMY_MEALS;
+
+  List<Meal> _favoritedMeals = [];
 
   @override
   Widget build(BuildContext context) {
@@ -83,10 +102,10 @@ class _MyAppState extends State<MyApp> {
       ),
       initialRoute: CategoryList.routeName,
       routes: {
-        '/': (context) => TabsView(),
+        '/': (context) => TabsView(_favoritedMeals),
         // CategoryList.routeName: (context) => CategoryList(),
         CategoryMeals.routeName: (context) => CategoryMeals(_availableMeals),
-        MealDetail.routeName: (context) => MealDetail(),
+        MealDetail.routeName: (context) => MealDetail(_toggleFavorite, _isFavorite),
         FiltersScreen.routeName: (context) => FiltersScreen(_filters, _setFilters)
       },
       // when unknown route is hit
